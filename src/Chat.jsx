@@ -5,15 +5,24 @@ import { getRecipeFromMistral } from "./ai";
 
 
 export function Chat() {
-    const [ingredients, setIngredients] = useState(
-        ["all the main spices", "pasta", "ground beef", "tomato paste"]
-    );
+    const [ingredients, setIngredients] = useState([]);
 
     const [recipe, setRecipe] = useState("");
+    
+    const checkIngredients = (ingredient) => {
+        return ingredients.some(
+            item => item.toLowerCase() === ingredient.toLowerCase()
+        );
+    }
 
     const addIngredient = (formData) => {
         const newIngredient = formData.get("ingredient");
+        if(checkIngredients(newIngredient)) {
+            alert("Ingrident already exits");
+            return;
+        }
         setIngredients(prev => [...prev, newIngredient]);
+        console.log(ingredients);
     }
 
     const removeIngredient = (ingredient) => {
