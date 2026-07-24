@@ -58,6 +58,7 @@ export function Chat() {
             {ingredients.length > 0 && (
                 <IngredientsList 
                     ingredients={ingredients}
+                    setIngredients={setIngredients}
                     getRecipe={getRecipe}
                     removeIngredient={removeIngredient}
                 />
