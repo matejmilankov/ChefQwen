@@ -5,7 +5,7 @@ import { getRecipeFromMistral } from "./ai";
 
 
 export function Chat() {
-    const [ingredients, setIngredients] = useState([]);
+    const [ingredients, setIngredients] = useState(["all the main spices", "pasta", "ground beef", "tomato paste"]);
     const [recipe, setRecipe] = useState("");
     const [error, setError] = useState("");
     
