@@ -1,7 +1,7 @@
-export function IngredientsList({ ingredients, getRecipe, removeIngredient, setIngredients }) {
+export function IngredientsList(props) {
 
     const clearAllIngridents = () => {
-        setIngredients([]);
+        props.setIngredients([]);
     }
 
     return (
@@ -11,8 +11,8 @@ export function IngredientsList({ ingredients, getRecipe, removeIngredient, setI
                 <button onClick={clearAllIngridents}>Clear all</button>
             </div>
             <div className="ingredients-list" aria-live="polite">
-                {ingredients.map(ingredient => (
-                    <div key={ingredient} className="added-ingredient" onClick={() => removeIngredient(ingredient)}>
+                {props.ingredients.map(ingredient => (
+                    <div key={ingredient} className="added-ingredient" onClick={() => props.removeIngredient(ingredient)}>
                         <div className="remove">
                             <div className="minus"></div>
                         </div>
@@ -21,13 +21,18 @@ export function IngredientsList({ ingredients, getRecipe, removeIngredient, setI
                 ))}
             </div>
 
-            {ingredients.length > 3 && (
+            {props.ingredients.length > 3 && (
                 <div className="get-recipe-container">
                     <div>
                         <h3>Ready for a recipe?</h3>
                         <p>Generate a recipe from your list of ingredients.</p>
                     </div>
-                    <button onClick={getRecipe}>Get a recipe</button>
+                    <button 
+                        onClick={props.getRecipe}
+                        disabled={props.isGenereatingRecipe}
+                    >
+                        Get a recipe
+                    </button>
                 </div>
             )}
         </section>

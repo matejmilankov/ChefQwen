@@ -8,6 +8,7 @@ export function Chat() {
     const [ingredients, setIngredients] = useState(["all the main spices", "pasta", "ground beef", "tomato paste"]);
     const [recipe, setRecipe] = useState("");
     const [error, setError] = useState("");
+    const [isGenereatingRecipe, setIsGeneratingRecipe] = useState(false);
     
     const checkIngredients = (ingredient) => {
         return ingredients.some(
@@ -39,8 +40,10 @@ export function Chat() {
     }
 
     const getRecipe = async () => {
+        setIsGeneratingRecipe(true);
         const recipeMarkdown = await getRecipeFromMistral(ingredients);
         setRecipe(recipeMarkdown);
+        setIsGeneratingRecipe(false);
     }
 
     return (
@@ -61,6 +64,7 @@ export function Chat() {
                     setIngredients={setIngredients}
                     getRecipe={getRecipe}
                     removeIngredient={removeIngredient}
+                    isGenereatingRecipe={isGenereatingRecipe}
                 />
                 )}
 
