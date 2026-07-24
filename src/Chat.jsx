@@ -6,8 +6,8 @@ import { getRecipeFromMistral } from "./ai";
 
 export function Chat() {
     const [ingredients, setIngredients] = useState([]);
-
     const [recipe, setRecipe] = useState("");
+    const [error, setError] = useState("");
     
     const checkIngredients = (ingredient) => {
         return ingredients.some(
@@ -17,12 +17,19 @@ export function Chat() {
 
     const addIngredient = (formData) => {
         const newIngredient = formData.get("ingredient");
-        if(checkIngredients(newIngredient)) {
-            alert("Ingrident already exits");
+
+        if(!newIngredient) {
+            setError("You must enter an ingredient.");
             return;
         }
+
+        if(checkIngredients(newIngredient)) {
+            setError("Try adding different an ingredient.");
+            return;
+        }
+
         setIngredients(prev => [...prev, newIngredient]);
-        console.log(ingredients);
+        setError("");
     }
 
     const removeIngredient = (ingredient) => {
@@ -47,6 +54,7 @@ export function Chat() {
                 />
                 <button>Add ingredient</button>
             </form>
+            <p className="error-msg">{error}</p>
             {ingredients.length > 0 && (
                 <IngredientsList 
                     ingredients={ingredients}

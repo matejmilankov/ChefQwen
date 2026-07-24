@@ -147,3 +147,8 @@ main {
     font-size: 1.125rem;
     font-weight: 400;
 }
+
+.error-msg {
+  color: red;
+  margin-top: 5px;
+}
