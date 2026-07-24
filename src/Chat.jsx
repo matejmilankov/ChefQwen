@@ -16,7 +16,11 @@ export function Chat() {
         setIngredients(prev => [...prev, newIngredient]);
     }
 
-    
+    const removeIngredient = (ingredient) => {
+        setIngredients(prev => (
+            prev.filter(item => item != ingredient)
+        ));
+    }
 
     const getRecipe = async () => {
         const recipeMarkdown = await getRecipeFromMistral(ingredients);
@@ -38,6 +42,7 @@ export function Chat() {
                 <IngredientsList 
                     ingredients={ingredients}
                     getRecipe={getRecipe}
+                    removeIngredient={removeIngredient}
                 />
                 )}
 
