@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ClaudeRecipe } from "./components/ClaudeRecipe";
 import { IngredientsList } from "./components/IngredientsList";
 import { getRecipeFromMistral } from "./ai";
+import { Loader } from "./components/Loader";
 
 
 export function Chat() {
@@ -19,13 +20,13 @@ export function Chat() {
     const addIngredient = (formData) => {
         const newIngredient = formData.get("ingredient");
 
-        if(!newIngredient) {
+        if (!newIngredient) {
             setError("You must enter an ingredient.");
             return;
         }
 
-        if(checkIngredients(newIngredient)) {
-            setError("Try adding different an ingredient.");
+        if (checkIngredients(newIngredient)) {
+            setError("Try adding a different ingredient.");
             return;
         }
 
@@ -43,7 +44,7 @@ export function Chat() {
         setIsGeneratingRecipe(true);
         const recipeMarkdown = await getRecipeFromMistral(ingredients);
         setRecipe(recipeMarkdown);
-        //setIsGeneratingRecipe(false);
+        setIsGeneratingRecipe(false);
     }
 
     return (
@@ -59,16 +60,16 @@ export function Chat() {
             </form>
             <p className="error-msg">{error}</p>
             {ingredients.length > 0 && (
-                <IngredientsList 
+                <IngredientsList
                     ingredients={ingredients}
                     setIngredients={setIngredients}
                     getRecipe={getRecipe}
                     removeIngredient={removeIngredient}
                     isGenereatingRecipe={isGenereatingRecipe}
                 />
-                )}
-
-            {recipe && (<ClaudeRecipe recipe={recipe}/>)}
+            )}
+            {isGenereatingRecipe && <Loader />}
+            {recipe && (<ClaudeRecipe recipe={recipe} />)}
         </main>
     );
 }
