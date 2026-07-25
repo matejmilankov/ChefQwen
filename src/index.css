@@ -211,7 +211,8 @@ main {
   cursor: pointer;
 }
 
-.get-recipe-container button:disabled {
+.get-recipe-container button:disabled,
+.ingredients-list-heading > button:disabled {
   opacity: 0.3;
   cursor: default;
 }

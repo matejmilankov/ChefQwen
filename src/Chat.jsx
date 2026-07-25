@@ -43,7 +43,7 @@ export function Chat() {
         setIsGeneratingRecipe(true);
         const recipeMarkdown = await getRecipeFromMistral(ingredients);
         setRecipe(recipeMarkdown);
-        setIsGeneratingRecipe(false);
+        //setIsGeneratingRecipe(false);
     }
 
     return (

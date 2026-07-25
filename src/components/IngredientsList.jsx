@@ -8,7 +8,11 @@ export function IngredientsList(props) {
         <section>
             <div className="ingredients-list-heading">
                 <h2>Ingredients on hand:</h2>
-                <button onClick={clearAllIngridents}>Clear all</button>
+                <button 
+                    disabled={props.isGenereatingRecipe}
+                    onClick={clearAllIngridents}>
+                    Clear all
+                </button>
             </div>
             <div className="ingredients-list" aria-live="polite">
                 {props.ingredients.map(ingredient => (
@@ -29,8 +33,7 @@ export function IngredientsList(props) {
                     </div>
                     <button 
                         onClick={props.getRecipe}
-                        disabled={props.isGenereatingRecipe}
-                    >
+                        disabled={props.isGenereatingRecipe}>
                         Get a recipe
                     </button>
                 </div>
